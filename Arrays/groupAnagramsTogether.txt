@@ -1,0 +1,19 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,List<String>> map=new HashMap<>();
+        for(int i=0;i<strs.length;i++){ //taking particular element at an index.    
+            String s1=strs[i];      //storing in a string to basically just sort it.
+            char[] arr=s1.toCharArray();
+            Arrays.sort(arr);
+            String str=new String(arr); //storing it back into the string.
+            
+            if(map.containsKey(str)){  
+                map.get(str).add(s1); //if it already exists in hashmap then add it to it's corresponding arraylist.
+            }else{
+                map.put(str,new ArrayList<>()); //create a a new list corresponding to a newly found anagram.
+                map.get(str).add(s1); //add that string into that arraylist.
+            }
+        }
+        return new ArrayList<>(map.values()); //return the hashmap values in an arraylist. 
+    }
+}
