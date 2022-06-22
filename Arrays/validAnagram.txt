@@ -1,0 +1,47 @@
+//optimal solution
+//increment into frequency array for one string then decrement for another. All values should be zero.
+//if they are then true else false.
+//Time complexity -> O(N) Space complexity -> O(N)
+// public class Solution {
+//     public boolean isAnagram(String s, String t) {
+//         int[] alphabet = new int[26];
+//         for (int i = 0; i < s.length(); i++) 
+//             alphabet[s.charAt(i) - 'a']++;
+//         for (int i = 0; i < t.length(); i++)
+//             alphabet[t.charAt(i) - 'a']--;
+//         for (int i : alphabet) 
+//             if (i != 0) 
+//                 return false;
+//         return true;
+//     }
+// }
+
+
+//Same solution but done with hashmaps.
+//Time complexity -> O(N) Space complexity -> O(N)
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        Map<Character,Integer> map = new HashMap<>();
+        
+        for(int i=0; i<s.length();i++){
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c,0)+1);
+        }
+        
+        for(int i=0; i<t.length();i++){
+            char c = t.charAt(i);
+            map.put(c, map.getOrDefault(c,0)-1);
+        }
+        
+        for(Map.Entry<Character,Integer> entry : map.entrySet()){
+            int value = entry.getValue();
+            
+            if(value != 0){
+                return false;
+            }
+        }
+        
+        
+        return true;
+    }
+}
