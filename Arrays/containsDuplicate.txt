@@ -15,7 +15,7 @@ class Solution {
 }
 
 // //optimal solution 
-//keep adding nums in a set and check if they exist in the set already. if yes return false else true.
+//keep adding nums in a set and check if they don't exist in the set already. if yes return false else true.
 //Time complexity -> O(N)  Space Complexity -> O(N)
 // class Solution {
 //     public boolean containsDuplicate(int[] nums) {
