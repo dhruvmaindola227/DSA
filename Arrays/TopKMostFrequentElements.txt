@@ -1,0 +1,36 @@
+class Solution {
+    public static int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer , Integer> freq = new HashMap<>();
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < nums.length+1; i++) {
+            list.add(new ArrayList<>()); //adding (nums.length+1) number of empty lists.
+        }
+        int[] answer = new int[k];
+		//creating the{ NUM : FREQUENCY } map.
+        for (int i = 0; i < nums.length; i++) {
+            if(!freq.containsKey(nums[i])){
+                freq.put(nums[i] , 1);
+            }else{
+                freq.put(nums[i] , freq.get(nums[i]) +1);
+            }
+        }
+		//taking the number from the map , getting its frequency and adding the number in the sublist which is at the
+		//(frequency)th index in the list.
+        for (Integer num : freq.keySet()){
+            int freqOfNum = freq.get(num);
+            list.get(freqOfNum).add(num);
+        }
+        int i = list.size()-1;
+        int index = 0; //storing the numbers from the list to the final answer array.
+        while(i >= 0 && index < k){
+            if (!list.get(i).isEmpty()) {
+                for (int j = 0; j < list.get(i).size(); j++) {
+                    answer[index] = list.get(i).get(j);
+                    index++;
+                }
+            }
+            i--;
+        }
+        return answer;
+    }
+}
