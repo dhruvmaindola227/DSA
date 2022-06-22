@@ -1,0 +1,32 @@
+//Brute force.
+//take one element and search ahead of it in the array. Do this for every element.
+//Time complexity -> O(N^2)  Space Complexity -> O(1)
+// class Solution {
+//     static int[] twoSum(int[] nums , int target){
+//         for(int i=0;i<nums.length-1;i++){
+//             for(int j=i+1;j<nums.length;j++){
+//                 if(nums[i]+nums[j]==target){
+//                     return new int[]{i,j};
+//                 }
+//             }
+//         }
+//         return null;
+//         }
+
+
+//optimal 
+//Add target - curr element in map if it doesnt exist. if it does then a pair exists.
+//Time complexity -> O(N)  Space Complexity -> O(N)
+class Solution{
+    static int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length; i++){
+            if(map.containsKey(target - nums[i]))
+                return new int[] {map.get(target - nums[i]),i};
+            else map.put(nums[i], i);
+        }
+        return null;
+    }        
+    }
+
+
