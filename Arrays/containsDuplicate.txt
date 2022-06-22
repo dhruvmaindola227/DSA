@@ -1,11 +1,30 @@
+//brute force. //Sort and check adjacent elements. If found then true else false.
+//Time complexity -> O(N*LOG(N))  Space Complexity -> O(1)
 class Solution {
     public boolean containsDuplicate(int[] nums) {
-        HashSet<Integer> set= new HashSet<>();
-        for(int i=0;i<nums.length;i++){
-            if(!set.contains(nums[i]))
-                set.add(nums[i]);
-            else return true;
+        boolean flag = false;
+        Arrays.sort(nums); 
+        for(int i=0; i<nums.length-1; i++){
+            if(nums[i]==nums[i+1]){
+                flag = true;
+                break;
+                }
         }
-        return false;
+            return flag;
     }
 }
+
+// //optimal solution 
+//keep adding nums in a set and check if they exist in the set already. if yes return false else true.
+//Time complexity -> O(N)  Space Complexity -> O(N)
+// class Solution {
+//     public boolean containsDuplicate(int[] nums) {
+//         HashSet<Integer> set= new HashSet<>();
+//         for(int i=0;i<nums.length;i++){
+//             if(!set.contains(nums[i]))
+//                 set.add(nums[i]);
+//             else return true;
+//         }
+//         return false;
+//     }
+// }
