@@ -1,0 +1,25 @@
+class Solution {
+    //add method of HashSet returns true if it doesnt already exist in the set.
+    //using that property along with the tricky use of strings to make it easy for us
+    //to maintain track of 3 different things with just one hashset.
+    
+    
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<String> isSeen = new HashSet<>();
+        for (int i = 0 ; i < 9 ; i++){
+            for (int j = 0 ; j < 9 ; j++){
+                char current_char = board[i][j];
+                if(current_char != '.'){
+                     if (!isSeen.add(current_char + "found at row num -> " + i) ||
+                        !isSeen.add(current_char + "found at col num -> " + j) ||
+                        !isSeen.add(current_char + "found at box num -> " + i/3 + " " + j/3)){
+                            return false;
+                    }
+             }
+            
+        }
+        }
+        return true;
+            
+    }
+}
