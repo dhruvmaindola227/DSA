@@ -1,0 +1,35 @@
+//brute force would be to sort and then find by traversing.
+//O(N) time and space complexity.
+class Solution {
+   public int longestConsecutive(int[] nums) {
+       HashSet<Integer> numberSet = new HashSet<>();
+       int maxCount = 0;
+       
+       //adding the numbers into the hashset.
+       for(int num : nums){
+           numberSet.add(num);
+       }
+       
+       for(int num : nums){
+          int count = 1;
+           int temp = num;
+           if(numberSet.contains(num)){
+               //check for numbers less than the num in array.
+               while(numberSet.contains(--temp)){
+                   count++;
+                   numberSet.remove(temp);
+               }
+               
+               //check for the numbers greater than the num in array.
+               temp = num;
+               while(numberSet.contains(++temp)){
+                   count++;
+                   numberSet.remove(temp);
+               }
+           }
+           
+           maxCount = Math.max(maxCount , count);
+       }
+       return maxCount;
+   }
+}
