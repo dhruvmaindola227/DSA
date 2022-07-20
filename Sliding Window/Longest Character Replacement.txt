@@ -1,0 +1,34 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+        HashMap<Character , Integer> charCount = new HashMap<>();
+        int right = 0;  //these are the two pointers that will be used to create the window.
+        int left = 0;
+        int lengthOfWindow = 0;
+        int highestCountChar = 0;
+        int answer = 0;
+        while(left <= right && right < s.length()){
+            char current_char = s.charAt(right);
+            charCount.put(current_char , charCount.getOrDefault(current_char , 0) + 1); 
+            //if the character exists then increment else put with 1.
+            lengthOfWindow = right - left + 1;
+            highestCountChar = maxCount(charCount);
+            if(lengthOfWindow - highestCountChar <= k){
+                answer = lengthOfWindow;
+            }
+            else{
+                charCount.put(s.charAt(left) , charCount.get(s.charAt(left++)) - 1);
+                
+            }
+            right++;
+        }
+        return answer;
+        
+    }
+    
+    public static int maxCount(HashMap<Character , Integer> charCount){
+        return charCount.values().stream().max((ch1 , ch2) -> ch1 - ch2).orElse(null); 
+        //retrieving the max value from a map using stream api.
+	//(ch1,ch2) is comparator interface's compare method lambda.
+	//orElse() is applied because max() returns Optional<> of it.
+    }
+}
