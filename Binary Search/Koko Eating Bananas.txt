@@ -1,0 +1,22 @@
+class Solution {
+   public static int minEatingSpeed(int[] pileOfBananas , int timeLimit) {
+        //initializing the two pointers.
+        int left = 1;
+        int right = Arrays.stream(pileOfBananas).max().orElse(1);
+
+        while(left < right) {
+            int hoursSpent = 0;
+            int middle = left + (right - left) / 2;
+            for(int banana : pileOfBananas){
+                hoursSpent += Math.ceil((double) banana / middle);
+                //math.ceil because when banana < middle , it will be 0.something and we can just
+                //ceil it to 1 instead of handling with bunch of if else conditions.
+            }
+            if(hoursSpent <= timeLimit)
+                right = middle;
+            else
+                left = middle + 1;
+        }
+        return right;
+    }
+}
