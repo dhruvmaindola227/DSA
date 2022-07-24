@@ -1,0 +1,21 @@
+class Solution {
+    
+    public boolean searchMatrix(int[][] arr, int target) {
+        int start = 0;
+        int row = 0;
+        int end = arr[row].length - 1;
+        while(start <= end && row < arr.length){
+            if(target <= arr[row][end]){
+                int middle = start + (end - start) / 2;
+                if(target == arr[row][middle]){
+                    return true;
+                }else if(target < arr[row][middle]){
+                    end = middle - 1;
+                }else{
+                    start = middle + 1;
+                }
+            }
+            else row++;
+        }
+        return false;
+    }
